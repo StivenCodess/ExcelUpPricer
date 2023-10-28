@@ -7,18 +7,13 @@ const inputFile = document.getElementById("file");
 // });
 
 inputFile.addEventListener("change", async (e) => {
-	const file = e.target.files[0];
-	const data = await file.arrayBuffer();
+  const file = e.target.files[0];
+  const data = await file.arrayBuffer();
 
-	// const workbook = XLSX.read(data, { type: "array" });
-	// const sheet = workbook.SheetNames[0];
+  // const workbook = XLSX.read(data, { type: "array" });
+  // const sheet = workbook.SheetNames[0];
 
-	// const dataExcel = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]);
+  // const dataExcel = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]);
 
-	console.log("Numeros alterados");
-	// dataExcel.forEach((element) => {
-	// 	element["Precio venta"] = element["Precio venta"].replace("$", "") * 2;
-	// 	console.log(element["Precio venta"]);
-	// });
-	ipcRenderer.send("uploaded", data);
+  ipcRenderer.send("uploaded", data);
 });
