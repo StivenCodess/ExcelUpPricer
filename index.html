@@ -2,7 +2,6 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
 		<meta
 			http-equiv="Content-Security-Policy"
 			content="default-src 'self'; script-src 'self'"
@@ -11,13 +10,47 @@
 			http-equiv="X-Content-Security-Policy"
 			content="default-src 'self'; script-src 'self'"
 		/>
-		<title>Aumento de Precios by StivenCodess</title>
+		<link rel="stylesheet" href="index.css" />
+		<title>Excel Up Pricer - StivenCodess 👽</title>
 	</head>
 	<body>
-		<h2>Ingresar porcenaje que quiere aumentar:</h2>
-		<input type="number" />
-		<h3>Suba el archivo excel de precios</h3>
-		<input id="file" type="file" />
+		<main>
+			<h1>Excel Up Pricer</h1>
+			<h3>Aumenta o disminuí los precios de tu excel para Abarrotes 2.12</h3>
+
+			<div class="info-icon" id="info-icon">
+				<img src="assets/icons/info.svg" alt="info icon" />
+			</div>
+
+			<div class="container-file">
+				<p>SUBIR</p>
+				<input class="input-file" id="file" type="file" />
+			</div>
+			<span class="filename">❌ No tienes un archivo subido</span>
+
+			<div class="percentages-container">
+				<div class="percentages-buttons">
+					<button data-percentage="5">5%</button>
+					<button data-percentage="10">10%</button>
+					<button data-percentage="15">15%</button>
+					<button data-percentage="20">20%</button>
+				</div>
+				<input
+					id="custom-percentage"
+					type="number"
+					min="0"
+					name="custom"
+					max="100"
+					placeholder="CUSTOM"
+				/>
+			</div>
+
+			<div class="buttons-up-down--container">
+				<button id="increase-price-button">AUMENTAR</button>
+				<button id="decrease-price-button">DESCONTAR</button>
+			</div>
+		</main>
+		<h4>Programmed by StivenCodess 👽</h4>
 	</body>
 	<script src="./utils.js"></script>
 </html>
