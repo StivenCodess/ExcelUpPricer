@@ -9,8 +9,16 @@ const buttonsPercentages = document.querySelectorAll(".percentages-buttons butto
 
 const infoIcon = document.getElementById("info-icon");
 
+const statusMsg = document.getElementById("status-msg");
+
 let selectedButton = null;
 let percentage = null;
+
+document.addEventListener("DOMContentLoaded", () => {
+	window.api.status_message((e, msg) => {
+		statusMsg.innerHTML = `Status: ${msg}`;
+	});
+});
 
 buttonsPercentages.forEach((button) => {
 	button.addEventListener("click", (e) => {

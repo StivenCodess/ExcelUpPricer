@@ -6,16 +6,17 @@
   "scripts": {
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dist": "electron-builder"
+    "dist": "electron-builder -p always"
   },
   "repository": "https://github.com/StivenCodess/ExcelUpPricer",
   "publish": {
     "provider": "github",
+    "owner": "StivenCodess",
     "releaseType": "release"
   },
   "build": {
     "appId": "com.stivencodess.exceluppricer",
-    "productname": "Excel Up Pricer",
+    "productName": "Excel Up Pricer",
     "win": {
       "target": "nsis"
     },
@@ -27,10 +28,10 @@
   "author": "StivenCodess",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^27.0.2"
+    "electron": "^27.0.2",
+    "electron-builder": "^24.6.4"
   },
   "dependencies": {
-    "electron-builder": "^24.6.4",
     "electron-log": "^5.0.0",
     "electron-updater": "^6.1.4",
     "toastify-js": "^1.12.0",

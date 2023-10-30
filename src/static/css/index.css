@@ -40,6 +40,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	overflow: hidden;
 }
 
 img,
@@ -225,4 +226,21 @@ input[type="file"]::-webkit-file-upload-button {
 .selected {
 	background-color: #26874e;
 	color: white;
+}
+
+.status-container {
+	background-color: white;
+	color: black;
+	width: 250px;
+	position: absolute;
+	right: -20px;
+	bottom: 50px;
+	border-radius: 8px;
+	padding: 10px 0px;
+}
+
+.status-container span {
+	display: block;
+	text-align: start;
+	padding-left: 10px;
 }

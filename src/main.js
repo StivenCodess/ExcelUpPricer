@@ -4,6 +4,8 @@ const { join } = require("path");
 
 const XLSX = require("xlsx");
 
+let win = null;
+
 autoUpdater.autoDownload = false;
 autoUpdater.autoInstallOnAppQuit = true;
 
@@ -34,11 +36,11 @@ const decreasePrice = (dataExcel, percentage) => {
 };
 
 const createWindow = () => {
-	const win = new BrowserWindow({
+	win = new BrowserWindow({
 		// width: 630,
 		// height: 580,
 		width: 1500,
-		height: 1000,
+		height: 700,
 		resizable: true,
 		webPreferences: {
 			nodeIntegration: true,
@@ -50,10 +52,6 @@ const createWindow = () => {
 	// win.setMenu(null);
 	win.loadFile("src/static/index.html");
 	win.webContents.openDevTools();
-
-	win.webContents.on("did-finish-load", () => {
-		win.webContents.send("uploaded-server", "Hello!");
-	});
 };
 
 ipcMain.on("uploaded", async (e, data, percentage, action) => {
@@ -94,4 +92,27 @@ ipcMain.on("uploaded", async (e, data, percentage, action) => {
 app.whenReady().then(() => {
 	createWindow();
 	autoUpdater.checkForUpdates();
+	win.webContents.on("did-finish-load", () => {
+		win.webContents.send("status", "Checking Updates");
+	});
+
+	win.webContents.send("status", "Sigo checkeando");
+});
+
+autoUpdater.on("update-available", (info) => {
+	win.webContents.send("status", "Actualizacion disponible");
+	let pth = autoUpdater.downloadUpdate();
+	win.webContents.send("status", pth);
+});
+
+autoUpdater.on("update-not-available", (info) => {
+	win.webContents.send("status", "No hay actualizacion disponible");
+});
+
+autoUpdater.on("update-downloaded", (info) => {
+	win.webContents.send("status", "Actualizacion descargada");
+});
+
+autoUpdater.on("error", (info) => {
+	win.webContents.send("status", info);
 });
