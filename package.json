@@ -1,19 +1,39 @@
 {
   "name": "excel-up-pricer",
   "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
+  "description": "Facilitates the increase or decrease of grocery prices with a simple click.",
+  "main": "./src/main.js",
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dist": "electron-builder"
+  },
+  "repository": "https://github.com/StivenCodess/ExcelUpPricer",
+  "publish": {
+    "provider": "github",
+    "releaseType": "release"
+  },
+  "build": {
+    "appId": "com.stivencodess.exceluppricer",
+    "productname": "Excel Up Pricer",
+    "win": {
+      "target": "nsis"
+    },
+    "directories": {
+      "output": "dist"
+    }
   },
   "keywords": [],
-  "author": "",
+  "author": "StivenCodess",
   "license": "ISC",
   "devDependencies": {
     "electron": "^27.0.2"
   },
   "dependencies": {
+    "electron-builder": "^24.6.4",
+    "electron-log": "^5.0.0",
+    "electron-updater": "^6.1.4",
+    "toastify-js": "^1.12.0",
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.0/xlsx-0.20.0.tgz"
   }
 }

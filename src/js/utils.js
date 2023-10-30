@@ -1,4 +1,3 @@
-const { ipcRenderer } = require("electron");
 const inputFile = document.getElementById("file");
 const filename = document.querySelector(".filename");
 
@@ -12,10 +11,6 @@ const infoIcon = document.getElementById("info-icon");
 
 let selectedButton = null;
 let percentage = null;
-
-// ipcRenderer.on("uploaded-server", (event, arg) => {
-// 	console.log("Message from server");
-// });
 
 buttonsPercentages.forEach((button) => {
 	button.addEventListener("click", (e) => {
@@ -47,13 +42,13 @@ inputFile.addEventListener("change", (e) => {
 increaseButton.addEventListener("click", async () => {
 	const datafile = await inputFile.files[0].arrayBuffer();
 	if (percentage && percentage > 0)
-		ipcRenderer.send("uploaded", datafile, percentage, "increase");
+		window.api.update_excel(datafile, percentage, "increase");
 });
 
 decreaseButton.addEventListener("click", async () => {
 	const datafile = await inputFile.files[0].arrayBuffer();
 	if (percentage && percentage > 0)
-		ipcRenderer.send("uploaded", datafile, percentage, "decrease");
+		window.api.update_excel("uploaded", datafile, percentage, "decrease");
 });
 
 infoIcon.addEventListener("click", () => {
