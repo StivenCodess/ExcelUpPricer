@@ -1,0 +1,124 @@
+@font-face {
+	font-family: Roboto;
+	font-weight: 400;
+	src: url(./assets/fonts/Roboto-Regular.ttf);
+}
+@font-face {
+	font-family: Roboto;
+	font-weight: 100;
+	src: url(./assets/fonts/Roboto-Thin.ttf);
+}
+@font-face {
+	font-family: Roboto;
+	font-weight: 700;
+	src: url(./assets/fonts/Roboto-Bold.ttf);
+}
+@font-face {
+	font-family: Roboto;
+	font-weight: 300;
+	src: url(./assets/fonts/Roboto-Light.ttf);
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+* {
+	margin: 0;
+}
+
+body {
+	height: 100vh;
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+	font-family: "Roboto";
+	background-color: rgb(40, 40, 40);
+	color: white;
+	text-align: center;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+section {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+h1 {
+	text-transform: uppercase;
+	font-size: 32px;
+}
+
+h2 {
+	margin-top: 40px;
+	font-weight: 400;
+	font-size: 22px;
+}
+
+h3 {
+	font-weight: 100;
+	font-size: 16px;
+}
+
+h4 {
+	font-size: 18px;
+	font-weight: 100;
+	padding: 10px;
+}
+
+p {
+	font-weight: 100;
+	font-size: 15px;
+	width: 70%;
+}
+
+.home-icon {
+	background-color: white;
+	border-radius: 50%;
+	position: absolute;
+	right: 20px;
+	top: 10px;
+	width: 35px;
+	padding: 7px;
+	cursor: pointer;
+	transition: scale 0.4s ease;
+}
+.home-icon:hover {
+	scale: 1.2;
+}
+
+.step-container {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.step-container img {
+	width: 70%;
+	border-radius: 20px;
+	margin: 20px 0px 40px 0px;
+}
