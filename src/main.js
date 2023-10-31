@@ -47,6 +47,7 @@ const createWindow = () => {
 		},
 	});
 
+	win.setMenu(null);
 	win.loadFile("src/static/index.html");
 
 	win.webContents.on("did-finish-load", () => {
