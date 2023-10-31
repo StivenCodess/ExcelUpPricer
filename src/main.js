@@ -6,7 +6,7 @@ const XLSX = require("xlsx");
 
 let win = null;
 
-autoUpdater.autoDownload = true;
+autoUpdater.autoDownload = false;
 autoUpdater.autoInstallOnAppQuit = true;
 
 const increasePrice = (dataExcel, percentage) => {
@@ -37,11 +37,9 @@ const decreasePrice = (dataExcel, percentage) => {
 
 const createWindow = () => {
 	win = new BrowserWindow({
-		// width: 630,
-		// height: 580,
-		width: 1500,
-		height: 780,
-		resizable: true,
+		width: 630,
+		height: 580,
+		resizable: false,
 		webPreferences: {
 			nodeIntegration: true,
 			contextIsolation: true,
@@ -49,9 +47,7 @@ const createWindow = () => {
 		},
 	});
 
-	// win.setMenu(null);
 	win.loadFile("src/static/index.html");
-	win.webContents.openDevTools();
 
 	win.webContents.on("did-finish-load", () => {
 		const version = app.getVersion();
@@ -100,12 +96,11 @@ app.whenReady().then(() => {
 });
 
 autoUpdater.on("update-available", (info) => {
-	autoUpdater.downloadUpdate();
+	let php = autoUpdater.downloadUpdate();
 });
 
 autoUpdater.on("update-downloaded", (info) => {
 	win.webContents.send("showMessage", "Actualizacion disponible. ");
-	console.log("Descargado");
 });
 
 autoUpdater.on("error", (info) => {
