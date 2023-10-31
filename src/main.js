@@ -1,6 +1,5 @@
-const { error } = require("console");
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
-const { autoUpdater, AppUpdater } = require("electron-updater");
+const { autoUpdater } = require("electron-updater");
 const { join } = require("path");
 
 const XLSX = require("xlsx");
@@ -38,9 +37,11 @@ const decreasePrice = (dataExcel, percentage) => {
 
 const createWindow = () => {
 	win = new BrowserWindow({
-		width: 630,
-		height: 580,
-		resizable: false,
+		// width: 630,
+		// height: 580,
+		width: 1500,
+		height: 780,
+		resizable: true,
 		webPreferences: {
 			nodeIntegration: true,
 			contextIsolation: true,
@@ -48,8 +49,9 @@ const createWindow = () => {
 		},
 	});
 
-	win.setMenu(null);
+	// win.setMenu(null);
 	win.loadFile("src/static/index.html");
+	win.webContents.openDevTools();
 
 	win.webContents.on("did-finish-load", () => {
 		const version = app.getVersion();
@@ -99,7 +101,11 @@ app.whenReady().then(() => {
 
 autoUpdater.on("update-available", (info) => {
 	autoUpdater.downloadUpdate();
+});
+
+autoUpdater.on("update-downloaded", (info) => {
 	win.webContents.send("showMessage", "Actualizacion disponible. ");
+	console.log("Descargado");
 });
 
 autoUpdater.on("error", (info) => {
