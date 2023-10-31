@@ -1,6 +1,6 @@
 {
   "name": "excel-up-pricer",
-  "version": "3.0.0",
+  "version": "2.0.0",
   "description": "Facilitates the increase or decrease of grocery prices with a simple click.",
   "main": "./src/main.js",
   "scripts": {
@@ -9,11 +9,6 @@
     "dist": "electron-builder -p always"
   },
   "repository": "https://github.com/StivenCodess/ExcelUpPricer",
-  "publish": {
-    "provider": "github",
-    "owner": "StivenCodess",
-    "releaseType": "release"
-  },
   "build": {
     "appId": "com.stivencodess.exceluppricer",
     "productName": "Excel Up Pricer",
@@ -22,6 +17,11 @@
     },
     "directories": {
       "output": "dist"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "StivenCodess",
+      "releaseType": "release"
     }
   },
   "keywords": [],

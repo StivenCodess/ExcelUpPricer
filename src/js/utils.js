@@ -8,15 +8,25 @@ const inputPercentage = document.getElementById("custom-percentage");
 const buttonsPercentages = document.querySelectorAll(".percentages-buttons button");
 
 const infoIcon = document.getElementById("info-icon");
-
-const statusMsg = document.getElementById("status-msg");
+const version = document.getElementById("version");
 
 let selectedButton = null;
 let percentage = null;
 
-document.addEventListener("DOMContentLoaded", () => {
-	window.api.status_message((e, msg) => {
-		statusMsg.innerHTML = `Status: ${msg}`;
+window.api.getVersion((e, msg) => {
+	version.innerHTML = ` Version: ${msg}`;
+});
+
+window.api.status_message((e, msg) => {
+	window.api.toast({
+		text: "Actualizacion disponible. ",
+		duration: -1,
+		close: true,
+		gravity: "bottom",
+		position: "right",
+		style: {
+			background: "linear-gradient(to right, #00b09b, #96c93d)",
+		},
 	});
 });
 
@@ -48,15 +58,71 @@ inputFile.addEventListener("change", (e) => {
 });
 
 increaseButton.addEventListener("click", async () => {
-	const datafile = await inputFile.files[0].arrayBuffer();
+	let datafile = null;
+
+	if (inputFile.files[0] !== undefined) {
+		datafile = await inputFile.files[0].arrayBuffer();
+	} else {
+		window.api.toast({
+			text: "Selecciona un archivo. ",
+			duration: 3000,
+			close: true,
+			gravity: "bottom",
+			position: "right",
+			style: {
+				background: "linear-gradient(to right, #FF5733, #FF0049)",
+			},
+		});
+		return;
+	}
+
 	if (percentage && percentage > 0)
 		window.api.update_excel(datafile, percentage, "increase");
+	else
+		window.api.toast({
+			text: "Selecciona un porcentaje. ",
+			duration: 3000,
+			close: true,
+			gravity: "bottom",
+			position: "right",
+			style: {
+				background: "linear-gradient(to right, #FF5733, #FF0049)",
+			},
+		});
 });
 
 decreaseButton.addEventListener("click", async () => {
-	const datafile = await inputFile.files[0].arrayBuffer();
+	let datafile = null;
+
+	if (inputFile.files[0] !== undefined) {
+		datafile = await inputFile.files[0].arrayBuffer();
+	} else {
+		window.api.toast({
+			text: "Selecciona un archivo. ",
+			duration: 3000,
+			close: true,
+			gravity: "bottom",
+			position: "right",
+			style: {
+				background: "linear-gradient(to right, #FF5733, #FF0049)",
+			},
+		});
+		return;
+	}
+
 	if (percentage && percentage > 0)
-		window.api.update_excel("uploaded", datafile, percentage, "decrease");
+		window.api.update_excel(datafile, percentage, "increase");
+	else
+		window.api.toast({
+			text: "Selecciona un porcentaje. ",
+			duration: 3000,
+			close: true,
+			gravity: "bottom",
+			position: "right",
+			style: {
+				background: "linear-gradient(to right, #FF5733, #FF0049)",
+			},
+		});
 });
 
 infoIcon.addEventListener("click", () => {

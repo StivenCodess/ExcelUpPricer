@@ -1,4 +1,5 @@
-const { app, BrowserWindow, ipcMain, ipcRenderer, dialog } = require("electron");
+const { error } = require("console");
+const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const { autoUpdater, AppUpdater } = require("electron-updater");
 const { join } = require("path");
 
@@ -6,7 +7,7 @@ const XLSX = require("xlsx");
 
 let win = null;
 
-autoUpdater.autoDownload = false;
+autoUpdater.autoDownload = true;
 autoUpdater.autoInstallOnAppQuit = true;
 
 const increasePrice = (dataExcel, percentage) => {
@@ -37,11 +38,9 @@ const decreasePrice = (dataExcel, percentage) => {
 
 const createWindow = () => {
 	win = new BrowserWindow({
-		// width: 630,
-		// height: 580,
-		width: 1500,
-		height: 700,
-		resizable: true,
+		width: 630,
+		height: 580,
+		resizable: false,
 		webPreferences: {
 			nodeIntegration: true,
 			contextIsolation: true,
@@ -49,9 +48,13 @@ const createWindow = () => {
 		},
 	});
 
-	// win.setMenu(null);
+	win.setMenu(null);
 	win.loadFile("src/static/index.html");
-	win.webContents.openDevTools();
+
+	win.webContents.on("did-finish-load", () => {
+		const version = app.getVersion();
+		win.webContents.send("getVersion", version);
+	});
 };
 
 ipcMain.on("uploaded", async (e, data, percentage, action) => {
@@ -92,27 +95,13 @@ ipcMain.on("uploaded", async (e, data, percentage, action) => {
 app.whenReady().then(() => {
 	createWindow();
 	autoUpdater.checkForUpdates();
-	win.webContents.on("did-finish-load", () => {
-		win.webContents.send("status", "Checking Updates");
-	});
-
-	win.webContents.send("status", "Sigo checkeando");
 });
 
 autoUpdater.on("update-available", (info) => {
-	win.webContents.send("status", "Actualizacion disponible");
-	let pth = autoUpdater.downloadUpdate();
-	win.webContents.send("status", pth);
-});
-
-autoUpdater.on("update-not-available", (info) => {
-	win.webContents.send("status", "No hay actualizacion disponible");
-});
-
-autoUpdater.on("update-downloaded", (info) => {
-	win.webContents.send("status", "Actualizacion descargada");
+	autoUpdater.downloadUpdate();
+	win.webContents.send("showMessage", "Actualizacion disponible. ");
 });
 
 autoUpdater.on("error", (info) => {
-	win.webContents.send("status", info);
+	console.log(error);
 });
